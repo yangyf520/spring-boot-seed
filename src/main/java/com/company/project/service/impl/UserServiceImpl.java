@@ -4,10 +4,12 @@ import com.company.project.dao.UserMapper;
 import com.company.project.model.User;
 import com.company.project.service.UserService;
 import com.company.project.core.AbstractService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -19,6 +21,10 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     @Resource
     private UserMapper userMapper;
 
+    public List<User> listUser(Integer pageNum, Integer pageSize) {
 
+        PageHelper.startPage(pageNum, pageSize);
+        return userMapper.selectAll();
+    }
 
 }
